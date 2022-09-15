@@ -4,11 +4,11 @@ import { BrowserModule } from '@angular/platform-browser'
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { FormsModule } from '@angular/forms'
-import { ChildComponent } from './parent/child/child.component'
-import { ParentComponent } from './parent/parent.component'
+import { CompAComponent } from './components/comp-a/comp-a/comp-a.component'
+import { CompBComponent } from './components/comp-b/comp-b/comp-b.component'
 
 @NgModule({
-  declarations: [AppComponent, ChildComponent, ParentComponent],
+  declarations: [AppComponent, CompAComponent, CompBComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
