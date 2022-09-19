@@ -1,20 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
-import { apiKey } from '../../../../environments/api-key.environment'
-
-interface Todo {
-  addedDate: string
-  id: string
-  order: number
-  title: string
-}
-
-interface BaseResponse<T = {}> {
-  data: T
-  messages: string[]
-  fieldsErrors: string[]
-  resultCode: number
-}
+import { Todo, TodosService } from '../../../services/todos.service'
 
 @Component({
   selector: 'inst-todos',
@@ -23,22 +8,15 @@ interface BaseResponse<T = {}> {
 })
 export class TodosComponent implements OnInit {
   todos: Todo[] = []
-  baseURL = 'https://social-network.samuraijs.com/api/1.1/'
-  httpOptions = {
-    withCredentials: true,
-    headers: {
-      'api-key': apiKey,
-    },
-  }
 
-  constructor(private http: HttpClient) {}
+  constructor(private todosService: TodosService) {}
 
   ngOnInit(): void {
     this.getTodos()
   }
 
   getTodos() {
-    this.http.get<Todo[]>(`${this.baseURL}todo-lists`, this.httpOptions).subscribe(res => {
+    this.todosService.getTodos().subscribe(res => {
       this.todos = res
     })
   }
@@ -46,20 +24,17 @@ export class TodosComponent implements OnInit {
   createTodo() {
     const randomNumber = Math.floor(Math.random() * 100)
     const title = 'Angular' + randomNumber
-    this.http
-      .post<BaseResponse<{ item: Todo }>>(`${this.baseURL}todo-lists`, { title }, this.httpOptions)
-      .subscribe(res => {
-        const newTodo = res.data.item
-        this.todos.unshift(newTodo)
-      })
+
+    this.todosService.createTodo(title).subscribe(res => {
+      const newTodo = res.data.item
+      this.todos.unshift(newTodo)
+    })
   }
 
   deleteTodo() {
-    const todoId = '254352c7-dc8f-410a-ab81-2f4c550ddea9'
-    this.http
-      .delete<BaseResponse>(`${this.baseURL}todo-lists/${todoId}`, this.httpOptions)
-      .subscribe(res => {
-        this.todos = this.todos.filter(todolist => todolist.id !== todoId)
-      })
+    const todoId = 'd8784b6f-27a9-493d-b206-f3c1d1aa2cd0'
+    this.todosService.deleteTodo(todoId).subscribe(() => {
+      this.todos = this.todos.filter(todolist => todolist.id !== todoId)
+    })
   }
 }
