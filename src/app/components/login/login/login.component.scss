@@ -1,3 +1,23 @@
 .error {
-  color: #b20808;
+  color: darkred;
+}
+
+//.inputError {
+//  border: 2px solid darkred;
+//  background-color: lightcoral;
+//  border-radius: 5px;
+//}
+//
+//.inputSuccess {
+//  border: 2px solid green;
+//  background-color: lightgreen;
+//  border-radius: 5px;
+//}
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
 }
