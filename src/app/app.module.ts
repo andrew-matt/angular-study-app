@@ -3,14 +3,12 @@ import { BrowserModule } from '@angular/platform-browser'
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
-import { FormsModule } from '@angular/forms'
 import { HomeComponent } from './components/home/home.component'
 import { LoginComponent } from './components/login/login.component'
 import { TodosComponent } from './components/todos/todos.component'
 import { UsersComponent } from './components/users/users.component'
 import { ProfileComponent } from './components/profile/profile.component'
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component'
-import { RouterModule } from '@angular/router'
 
 @NgModule({
   declarations: [
@@ -22,18 +20,7 @@ import { RouterModule } from '@angular/router'
     ProfileComponent,
     PageNotFoundComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent },
-      { path: 'login', component: LoginComponent },
-      { path: 'todos', component: TodosComponent },
-      { path: 'users', component: UsersComponent },
-      { path: 'profile', component: ProfileComponent },
-    ]),
-  ],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
 })
