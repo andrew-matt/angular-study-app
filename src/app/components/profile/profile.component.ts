@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
+import { ProfileResponse, ProfileService } from '../../services/profile.service'
+import { Observable } from 'rxjs'
 
 @Component({
   selector: 'inst-profile',
@@ -6,7 +9,14 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  constructor() {}
+  profile$!: Observable<ProfileResponse>
 
-  ngOnInit(): void {}
+  constructor(private route: ActivatedRoute, private profileService: ProfileService) {}
+
+  ngOnInit(): void {
+    const userId = Number(this.route.snapshot.paramMap.get('userId'))
+    if (userId) {
+      this.profile$ = this.profileService.getProfile(userId)
+    }
+  }
 }

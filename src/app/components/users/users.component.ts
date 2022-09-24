@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core'
+import { User, UsersService } from '../../services/users.service'
+import { Observable } from 'rxjs'
 
 @Component({
   selector: 'inst-users',
@@ -6,7 +8,11 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-  constructor() {}
+  users$!: Observable<User[]>
 
-  ngOnInit(): void {}
+  constructor(private usersService: UsersService) {}
+
+  ngOnInit(): void {
+    this.users$ = this.usersService.getUsers()
+  }
 }
