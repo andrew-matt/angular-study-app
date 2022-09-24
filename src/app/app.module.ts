@@ -3,27 +3,28 @@ import { BrowserModule } from '@angular/platform-browser'
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
-import { HomeComponent } from './components/home/home.component'
-import { LoginComponent } from './components/login/login.component'
-import { TodosComponent } from './components/todos/todos.component'
-import { UsersComponent } from './components/users/users.component'
-import { ProfileComponent } from './components/profile/profile.component'
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component'
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
-import { CredentialsInterceptor } from './interceptors/credentials.interceptor'
+import { HttpClientModule } from '@angular/common/http'
+import { HomeModule } from './home/home.module'
+import { AuthModule } from './auth/auth.module'
+import { TodosModule } from './todos/todos.module'
+import { UsersModule } from './users/users.module'
+import { SharedModule } from './shared/shared.module'
+import { CoreModule } from './core/core.module'
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    LoginComponent,
-    TodosComponent,
-    UsersComponent,
-    ProfileComponent,
-    PageNotFoundComponent,
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    HomeModule,
+    AuthModule,
+    TodosModule,
+    UsersModule,
+    SharedModule,
+    CoreModule,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: CredentialsInterceptor, multi: true }],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
