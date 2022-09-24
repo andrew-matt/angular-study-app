@@ -3,5 +3,10 @@
   {{ user.id }} --- <a [routerLink]="['/profile', user.id]">{{ user.name }}</a>
 </div>
 <div>
+  <button style="margin-top: 10px" [routerLink]="['/users']" [queryParams]="{ page: 1 }">
+    to start page
+  </button>
+</div>
+<div>
   <button style="margin-top: 10px" (click)="nextUsersHandler()">next users</button>
 </div>
