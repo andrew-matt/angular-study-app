@@ -9,7 +9,8 @@ import { TodosComponent } from './components/todos/todos.component'
 import { UsersComponent } from './components/users/users.component'
 import { ProfileComponent } from './components/profile/profile.component'
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component'
-import { HttpClientModule } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
+import { CredentialsInterceptor } from './interceptors/credentials.interceptor'
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { HttpClientModule } from '@angular/common/http'
     PageNotFoundComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: CredentialsInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
